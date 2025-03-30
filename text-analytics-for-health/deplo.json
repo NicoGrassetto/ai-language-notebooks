@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "accounts_gdfgdfgdg234234234nicohoophoopbestprogrammer_name": {
+            "defaultValue": "gdfgdfgdg234234234nicohoophoopbestprogrammer",
+            "type": "String"
+        },
+        "searchServices_dfgdg234234234nicohoophoopbestprogrammer_asz7jakfrag2z4a_externalid": {
+            "defaultValue": "/subscriptions/66ff019d-3298-4b17-b525-bc7b89191a6c/resourceGroups/temp-dump/providers/Microsoft.Search/searchServices/dfgdg234234234nicohoophoopbestprogrammer-asz7jakfrag2z4a",
+            "type": "String"
+        },
+        "storageAccounts_dfghoophoopbestprog_externalid": {
+            "defaultValue": "/subscriptions/66ff019d-3298-4b17-b525-bc7b89191a6c/resourceGroups/temp-dump/providers/Microsoft.Storage/storageAccounts/dfghoophoopbestprog",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2024-10-01",
+            "name": "[parameters('accounts_gdfgdfgdg234234234nicohoophoopbestprogrammer_name')]",
+            "location": "eastus",
+            "sku": {
+                "name": "S"
+            },
+            "kind": "TextAnalytics",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "apiProperties": {
+                    "qnaAzureSearchEndpointId": "[parameters('searchServices_dfgdg234234234nicohoophoopbestprogrammer_asz7jakfrag2z4a_externalid')]"
+                },
+                "customSubDomainName": "[parameters('accounts_gdfgdfgdg234234234nicohoophoopbestprogrammer_name')]",
+                "networkAcls": {
+                    "defaultAction": "Allow",
+                    "virtualNetworkRules": [],
+                    "ipRules": []
+                },
+                "userOwnedStorage": [
+                    {
+                        "resourceId": "[parameters('storageAccounts_dfghoophoopbestprog_externalid')]"
+                    }
+                ],
+                "publicNetworkAccess": "Enabled"
+            }
+        }
+    ]
+}
