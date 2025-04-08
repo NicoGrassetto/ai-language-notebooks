@@ -2,16 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "accounts_gdfgdfgdg234234234nicohoophoopbestprogrammer_name": {
-            "defaultValue": "gdfgdfgdg234234234nicohoophoopbestprogrammer",
+        "name": {
+            "defaultValue": "test1",
             "type": "String"
         },
-        "searchServices_dfgdg234234234nicohoophoopbestprogrammer_asz7jakfrag2z4a_externalid": {
-            "defaultValue": "/subscriptions/66ff019d-3298-4b17-b525-bc7b89191a6c/resourceGroups/temp-dump/providers/Microsoft.Search/searchServices/dfgdg234234234nicohoophoopbestprogrammer-asz7jakfrag2z4a",
+        "qnaAzureSearchEndpointId": {
+            "defaultValue": "test2",
             "type": "String"
         },
-        "storageAccounts_dfghoophoopbestprog_externalid": {
-            "defaultValue": "/subscriptions/66ff019d-3298-4b17-b525-bc7b89191a6c/resourceGroups/temp-dump/providers/Microsoft.Storage/storageAccounts/dfghoophoopbestprog",
+        "resourceId": {
+            "defaultValue": "[concat('/subscriptions/66ff019d-3298-4b17-b525-bc7b89191a6c/resourceGroups/temp-dump/providers/Microsoft.Storage/storageAccounts/', uniqueString(resourceGroup().id, deployment().name, 'storage'))]",
             "type": "String"
         }
     },
@@ -20,7 +20,7 @@
         {
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2024-10-01",
-            "name": "[parameters('accounts_gdfgdfgdg234234234nicohoophoopbestprogrammer_name')]",
+            "name": "[parameters('name')]",
             "location": "eastus",
             "sku": {
                 "name": "S"
@@ -31,9 +31,9 @@
             },
             "properties": {
                 "apiProperties": {
-                    "qnaAzureSearchEndpointId": "[parameters('searchServices_dfgdg234234234nicohoophoopbestprogrammer_asz7jakfrag2z4a_externalid')]"
+                    "qnaAzureSearchEndpointId": "[parameters('qnaAzureSearchEndpointId')]"
                 },
-                "customSubDomainName": "[parameters('accounts_gdfgdfgdg234234234nicohoophoopbestprogrammer_name')]",
+                "customSubDomainName": "[parameters('name')]",
                 "networkAcls": {
                     "defaultAction": "Allow",
                     "virtualNetworkRules": [],
@@ -41,7 +41,7 @@
                 },
                 "userOwnedStorage": [
                     {
-                        "resourceId": "[parameters('storageAccounts_dfghoophoopbestprog_externalid')]"
+                        "resourceId": "[parameters('resourceId')]"
                     }
                 ],
                 "publicNetworkAccess": "Enabled"
